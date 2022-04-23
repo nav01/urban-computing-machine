@@ -16,13 +16,13 @@ SNIPE_IT_REQUEST_HEADERS = {
 @app.route("/hardware/bytag/<asset_tag>")
 def get_asset_by_tag(asset_tag):
     return requests.get(
-        SNIPE_IT_BASE_API_URL + url_for('get_asset_by_tag', asset_tag=escape(asset_tag)), 
+        SNIPE_IT_BASE_API_URL + url_for('get_asset_by_tag', asset_tag=asset_tag), 
         headers=SNIPE_IT_REQUEST_HEADERS
     ).json()
     
 @app.route("/users")
 def get_users():
-    params = {'limit': 10, 'offset': 0, 'search': escape(request.args.get('search'))}
+    params = {'limit': 10, 'offset': 0, 'search': request.args.get('search')}
     return requests.get(
         SNIPE_IT_BASE_API_URL + url_for('get_users'), 
         headers=SNIPE_IT_REQUEST_HEADERS, 
