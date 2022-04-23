@@ -28,3 +28,11 @@ def get_users():
         headers=SNIPE_IT_REQUEST_HEADERS, 
         params=params
     ).json()
+    
+@app.route("/hardware/<asset_id>/checkout", methods=['POST'])
+def checkout_asset(asset_id):
+    return requests.post(
+        SNIPE_IT_BASE_API_URL + url_for('checkout_asset', asset_id=asset_id),
+        headers=SNIPE_IT_REQUEST_HEADERS,
+        json=request.json
+    ).json()
