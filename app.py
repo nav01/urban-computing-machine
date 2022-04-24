@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, url_for, escape
+from flask import request, url_for
 import os
 import requests
 
@@ -36,3 +36,17 @@ def checkout_asset(asset_id):
         headers=SNIPE_IT_REQUEST_HEADERS,
         json=request.json
     ).json()
+    
+@app.route("/hardware/<asset_id>/checkin", methods=['POST'])
+def checkin_asset(asset_id):
+    if request.data:
+        return requests.post(
+            SNIPE_IT_BASE_API_URL + url_for('checkin_asset', asset_id=asset_id),
+            headers=SNIPE_IT_REQUEST_HEADERS,
+            json=request.json
+        ).json()
+    else:
+        return requests.post(
+            SNIPE_IT_BASE_API_URL + url_for('checkin_asset', asset_id=asset_id),
+            headers=SNIPE_IT_REQUEST_HEADERS,
+        ).json()
