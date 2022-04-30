@@ -29,6 +29,13 @@ def get_users():
         params=params
     ).json()
     
+@app.route("/statuslabels")
+def get_status_labels():
+    return requests.get(
+        SNIPE_IT_BASE_API_URL + url_for('get_status_labels'),
+        headers=SNIPE_IT_REQUEST_HEADERS
+    ).json()
+    
 @app.route("/hardware/<asset_id>/checkout", methods=['POST'])
 def checkout_asset(asset_id):
     return requests.post(
