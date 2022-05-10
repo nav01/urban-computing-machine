@@ -19,7 +19,7 @@ def get_asset_by_tag(asset_tag):
         SNIPE_IT_BASE_API_URL + url_for('get_asset_by_tag', asset_tag=asset_tag), 
         headers=SNIPE_IT_REQUEST_HEADERS
     ).json()
-    
+
 @app.route("/users")
 def get_users():
     params = {'limit': 10, 'offset': 0, 'search': request.args.get('search')}
@@ -27,6 +27,13 @@ def get_users():
         SNIPE_IT_BASE_API_URL + url_for('get_users'), 
         headers=SNIPE_IT_REQUEST_HEADERS, 
         params=params
+    ).json()
+    
+@app.route("/users/<user_id>/assets")
+def get_users_assets(user_id):
+    return requests.get(
+        SNIPE_IT_BASE_API_URL + url_for('get_users_assets', user_id=user_id),
+        headers=SNIPE_IT_REQUEST_HEADERS
     ).json()
     
 @app.route("/statuslabels")
