@@ -36,6 +36,14 @@ def get_users_assets(user_id):
         headers=SNIPE_IT_REQUEST_HEADERS
     ).json()
     
+@app.route("/users/<user_id>", methods=['PATCH'])
+def patch_users(user_id):
+    return requests.patch(
+        SNIPE_IT_BASE_API_URL + url_for('patch_users', user_id=user_id),
+        headers=SNIPE_IT_REQUEST_HEADERS,
+        json=request.json
+    ).json()
+    
 @app.route("/statuslabels")
 def get_status_labels():
     return requests.get(
